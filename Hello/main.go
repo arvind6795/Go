@@ -240,13 +240,64 @@ func main(){
 	// fmt.Println(x,y)//0xc00008c0a8 where the value 7 is stored
 	// *y=9//derefrence the value of x.
 	// fmt.Println(x,y)
-	toChange:="Hello"
-	// fmt.Println(toChange)
-	// changeValue(&toChange)
-	// fmt.Println(toChange)
-	var ptr *string= &toChange
-	fmt.Println(*ptr,ptr,&ptr)//Value:Hello pointer:0xc00009c060 ptr(ptr):0xc00008e058//pointer of ptr
+	// toChange:="Hello"
+	// // fmt.Println(toChange)
+	// // changeValue(&toChange)
+	// // fmt.Println(toChange)
+	// var ptr *string= &toChange
+	// fmt.Println(*ptr,ptr,&ptr)//Value:Hello pointer:0xc00009c060 ptr(ptr):0xc00008e058//pointer of ptr
+	//Structs and Custom Types
+	// var p1 Point=Point{2,3}
+	// p2:=Point{-2,-3}
+	// fmt.Println(p1.x,p2.x)
+	// p1:=&Point{y:3}
+	// fmt.Println(p1)
+	// changeX(p1)
+	// fmt.Println(p1)
+	// c1:=Circle{4.5,&Point{2,3}}
+	// fmt.Println(c1.x)
+	s1:=Student{"Elliot",[]int{70,85,90,50},21}
+	fmt.Println(s1)
+	average:=s1.getAverageGrade()
+	fmt.Println(s1.getMaxGrade())
+	fmt.Println(average)
 
+
+}
+//struct  methods
+type Student struct{
+	name string
+	grade []int
+	age int
+}
+func (s *Student) getAverageGrade()float32{
+	sum:=0
+	for _ , v:=range s.grade{
+		sum+=v
+	}
+	return float32(sum)/float32(len(s.grade))
+}
+func (s *Student) getMaxGrade()int{
+	curr_max:=0
+	for _,v:=range s.grade{
+		if curr_max<v{
+			curr_max=v
+		}
+	}
+	return curr_max
+}
+//embedded struct
+// type Circle struct{
+// 	radius float64
+// 	*Point
+// }
+//struct
+type Point struct{
+	x int32
+	y int32
+}
+func changeX(pt *Point){
+	pt.x=1000
 }
 // func changeValue(str *string){
 // 	*str="changed!"
