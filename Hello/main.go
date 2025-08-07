@@ -2,6 +2,7 @@ package main
 
 import (
     "fmt"
+	"math"
 	// "bufio"
 	// "os"
     // "strconv"
@@ -256,36 +257,64 @@ func main(){
 	// fmt.Println(p1)
 	// c1:=Circle{4.5,&Point{2,3}}
 	// fmt.Println(c1.x)
-	s1:=Student{"Elliot",[]int{70,85,90,50},21}
-	fmt.Println(s1)
-	average:=s1.getAverageGrade()
-	fmt.Println(s1.getMaxGrade())
-	fmt.Println(average)
-
-
+	// s1:=Student{"Elliot",[]int{70,85,90,50},21}
+	// fmt.Println(s1)
+	// average:=s1.getAverageGrade()
+	// fmt.Println(s1.getMaxGrade())
+	// fmt.Println(average)
+	c1:=circle{4.5}
+	r1:=rectangle{2,6}
+	s1:=square{12.5}
+	shapes:=[]Shape{c1,r1,s1}
+	for _,v:=range shapes{
+		fmt.Println(v.area())
+	}
+}
+//Interface
+type Shape interface{
+	area() float64
+}
+type circle struct{
+	radius float64
+}
+type square struct{
+	side float64
+}
+type rectangle struct{
+	width float64
+	height float64
+}
+func (r rectangle) area() float64{
+	return r.width*r.height
+}
+func (c circle) area()float64{
+	return math.Pi*c.radius*c.radius
+}
+func(s square) area() float64{
+	return s.side*s.side
 }
 //struct  methods
-type Student struct{
-	name string
-	grade []int
-	age int
-}
-func (s *Student) getAverageGrade()float32{
-	sum:=0
-	for _ , v:=range s.grade{
-		sum+=v
-	}
-	return float32(sum)/float32(len(s.grade))
-}
-func (s *Student) getMaxGrade()int{
-	curr_max:=0
-	for _,v:=range s.grade{
-		if curr_max<v{
-			curr_max=v
-		}
-	}
-	return curr_max
-}
+// type Student struct{
+// 	name string
+// 	grade []int
+// 	age int
+// }
+// func (s *Student) getAverageGrade()float32{
+// 	sum:=0
+// 	for _ , v:=range s.grade{
+// 		sum+=v
+// 	}
+// 	return float32(sum)/float32(len(s.grade))
+// }
+// func (s *Student) getMaxGrade()int{
+// 	curr_max:=0
+// 	for _,v:=range s.grade{
+// 		if curr_max<v{
+// 			curr_max=v
+// 		}
+// 	}
+// 	return curr_max
+// }
 //embedded struct
 // type Circle struct{
 // 	radius float64
